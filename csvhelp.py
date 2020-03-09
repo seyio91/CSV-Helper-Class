@@ -23,3 +23,14 @@ Class CsvHelperModule:
                 return content, header
         except FileNotFoundError:
             printError(filename)
+
+    def writeCsvDict(self, filename, header, content):
+        try:
+            with open(filename, 'w+', newline='', encoding="utf-8") as csvFile:
+                writer = csv.DictWriter(csvFile, fieldnames=header)
+                writer.writeheader()
+                for row in content:
+                    writer.writerow(row)
+            print('wrote %s line to %s' %(len(content), filename))
+        except FileNotFoundError:
+            printError(filename)
