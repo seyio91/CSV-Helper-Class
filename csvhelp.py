@@ -34,3 +34,14 @@ Class CsvHelperModule:
             print('wrote %s line to %s' %(len(content), filename))
         except FileNotFoundError:
             printError(filename)
+
+    def writeCsvList(self, filename, header, content):
+        try:
+            with open(filename, 'w+', newline='') as csvFile:
+                writer = csv.writer(csvFile)
+                writer.writerow(header)
+                for row in content:
+                    writer.writerow(row)
+            print('wrote %s line to %s' % (len(content), filename))
+        except FileNotFoundError:
+            printError(filename)
