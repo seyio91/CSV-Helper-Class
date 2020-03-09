@@ -2,6 +2,7 @@ import csv
 
 
 Class CsvHelperModule:
+    # error function
     def printError(filename):
         print('%s not found' %filename)
 
@@ -45,3 +46,19 @@ Class CsvHelperModule:
             print('wrote %s line to %s' % (len(content), filename))
         except FileNotFoundError:
             printError(filename)
+
+class LineWriter:
+    def __init__(self, filename, header):
+        self.filename = filename
+        self.header = header
+
+    def writerInit(self):
+        self.writeFile = open(self.filename, 'w+', newline='', encoding="utf-8")
+        self.writer = csv.DictWriter(self.writeFile, fieldnames=self.header)
+        self.writer.writeheader()
+
+    def writerLine(self, row):
+        self.writer.writerow(row)
+
+    def close(self):
+        self.writeFile.close()
