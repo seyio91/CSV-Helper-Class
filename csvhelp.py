@@ -1,11 +1,21 @@
-import csv
+import csv, time
+import functools
 
+def funcTimer(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        func(*args, **kwargs)
+        endtime = time.time()
+        print('Time taken to run %s' %(endtime - start))
+    return wrapper
 
-Class CsvHelperModule:
+class CsvHelperModule:
     # error function
     def printError(filename):
         print('%s not found' %filename)
 
+    # CSV DictReader Helper
     def readCsvAsDict(self, filename):
         try:
             with open(filename, 'r', encoding="utf8") as csvFile:
@@ -15,6 +25,7 @@ Class CsvHelperModule:
         except FileNotFoundError:
             printError(filename)  
 
+    # CSV Reader Helper
     def readCsvAsList(self, filename):
         try:
             with open(filename, 'r', encoding="utf8") as csvFile:
@@ -25,6 +36,7 @@ Class CsvHelperModule:
         except FileNotFoundError:
             printError(filename)
 
+    # CSV DictWrite Helper
     def writeCsvDict(self, filename, header, content):
         try:
             with open(filename, 'w+', newline='', encoding="utf-8") as csvFile:
