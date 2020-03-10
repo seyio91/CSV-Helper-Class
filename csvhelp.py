@@ -1,6 +1,5 @@
 import csv, time
 import functools
-import unittest
 
 def funcTimer(func):
     @functools.wraps(func)
@@ -19,7 +18,7 @@ class CsvHelperModule:
 
     # CSV DictReader Helper
     @staticmethod
-    def readCsvAsDict(self, filename):
+    def readCsvAsDict(filename):
         try:
             with open(filename, 'r', encoding="utf8") as csvFile:
                 reader = csv.DictReader(csvFile)
@@ -30,7 +29,7 @@ class CsvHelperModule:
 
     # CSV Reader Helper
     @staticmethod
-    def readCsvAsList(self, filename):
+    def readCsvAsList(filename):
         try:
             with open(filename, 'r', encoding="utf8") as csvFile:
                 reader = csv.reader(csvFile)
@@ -42,7 +41,7 @@ class CsvHelperModule:
 
     # CSV DictWrite Helper
     @staticmethod
-    def writeCsvDict(self, filename, header, content):
+    def writeCsvDict(filename, header, content):
         try:
             with open(filename, 'w+', newline='', encoding="utf-8") as csvFile:
                 writer = csv.DictWriter(csvFile, fieldnames=header)
@@ -55,7 +54,7 @@ class CsvHelperModule:
 
     # CSV Writer Helper 
     @staticmethod
-    def writeCsvList(self, filename, header, content):
+    def writeCsvList(filename, header, content):
         try:
             with open(filename, 'w+', newline='') as csvFile:
                 writer = csv.writer(csvFile)
@@ -81,20 +80,3 @@ class LineWriter:
 
     def close(self):
         self.writeFile.close()
-
-class TestCSVHelperMethods(unittest.TestCase):
-
-    def test_csvDictReader_Helper(self):
-        pass
-
-    def test_csvReader_Helper(self):
-        pass
-
-    def test_csvDictWriter_Helper(self):
-        pass
-
-    def test_csvWriter_Helper(self):
-        pass
-
-if __name__ == '__main__':
-    unittest.main()
