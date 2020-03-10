@@ -22,7 +22,7 @@ class CsvHelperModule:
         try:
             with open(filename, 'r', encoding="utf8") as csvFile:
                 reader = csv.DictReader(csvFile)
-                print('Opening File %s' %filename)
+                print('\nOpening File %s' %filename)
                 return list(reader), reader.fieldnames
         except FileNotFoundError:
             printError(filename)  
@@ -33,6 +33,7 @@ class CsvHelperModule:
         try:
             with open(filename, 'r', encoding="utf8") as csvFile:
                 reader = csv.reader(csvFile)
+                print('\nOpening File %s' %filename)
                 content = list(reader)
                 header = content.pop(0)
                 return content, header
@@ -48,7 +49,7 @@ class CsvHelperModule:
                 writer.writeheader()
                 for row in content:
                     writer.writerow(row)
-            print('wrote %s line to %s' %(len(content), filename))
+            print('\nwrote %s line to %s' %(len(content), filename))
         except FileNotFoundError:
             printError(filename)
 
@@ -61,7 +62,7 @@ class CsvHelperModule:
                 writer.writerow(header)
                 for row in content:
                     writer.writerow(row)
-            print('wrote %s line to %s' % (len(content), filename))
+            print('\nwrote %s line to %s' % (len(content), filename))
         except FileNotFoundError:
             printError(filename)
 
