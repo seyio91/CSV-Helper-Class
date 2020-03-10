@@ -1,5 +1,6 @@
 import csv, time
 import functools
+import unittest
 
 def funcTimer(func):
     @functools.wraps(func)
@@ -9,13 +10,15 @@ def funcTimer(func):
         endtime = time.time()
         print('Time taken to run %s' %(endtime - start))
     return wrapper
+    
+# error function
+def printError(filename):
+    print('%s not found' %filename)
 
 class CsvHelperModule:
-    # error function
-    def printError(filename):
-        print('%s not found' %filename)
 
     # CSV DictReader Helper
+    @staticmethod
     def readCsvAsDict(self, filename):
         try:
             with open(filename, 'r', encoding="utf8") as csvFile:
@@ -26,6 +29,7 @@ class CsvHelperModule:
             printError(filename)  
 
     # CSV Reader Helper
+    @staticmethod
     def readCsvAsList(self, filename):
         try:
             with open(filename, 'r', encoding="utf8") as csvFile:
@@ -37,6 +41,7 @@ class CsvHelperModule:
             printError(filename)
 
     # CSV DictWrite Helper
+    @staticmethod
     def writeCsvDict(self, filename, header, content):
         try:
             with open(filename, 'w+', newline='', encoding="utf-8") as csvFile:
@@ -48,6 +53,8 @@ class CsvHelperModule:
         except FileNotFoundError:
             printError(filename)
 
+    # CSV Writer Helper 
+    @staticmethod
     def writeCsvList(self, filename, header, content):
         try:
             with open(filename, 'w+', newline='') as csvFile:
@@ -74,3 +81,20 @@ class LineWriter:
 
     def close(self):
         self.writeFile.close()
+
+class TestCSVHelperMethods(unittest.TestCase):
+
+    def test_csvDictReader_Helper(self):
+        pass
+
+    def test_csvReader_Helper(self):
+        pass
+
+    def test_csvDictWriter_Helper(self):
+        pass
+
+    def test_csvWriter_Helper(self):
+        pass
+
+if __name__ == '__main__':
+    unittest.main()
